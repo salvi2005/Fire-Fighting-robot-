@@ -1,0 +1,28 @@
+#define AIN1 4 //IN1(L298D) UNO Pin 4
+#define AIN2 5 //IN2(L298D) UNO Pin 5
+#define BIN1 6 //IN3(L298D) UNO Pin 6
+#define BIN2 7 //IN4(L298D) UNO Pin 7
+
+#define PWM_A 9 //EN(A) UNO Pin 9
+#define PWM_B 10 //EN(B) UNO Pin 10
+
+int angle = 0; // Set angle variable
+
+// Set angle from 0 to 180 (for servo rotation code, remove below if not needed for project)
+analogWrite(PWM_A, 0); analogWrite(PWM_B, 0);
+
+// Direction pins for IN1-IN4
+digitalWrite(AIN1, HIGH); digitalWrite(AIN2, LOW); // Forward
+digitalWrite(BIN1, HIGH); digitalWrite(BIN2, LOW); // Forward
+
+for (int angle = 0; angle <= 180; angle += 5) {
+    analogWrite(PWM_A, angle); // Vary pin for servo/rotation etc.
+    analogWrite(PWM_B, angle);
+    delay(15);
+}
+
+for (int angle = 180; angle > 0; angle -= 5) {
+    analogWrite(PWM_A, angle);
+    analogWrite(PWM_B, angle);
+    delay(15);
+}
